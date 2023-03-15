@@ -20,4 +20,4 @@ Using tempt is simple and straightforward. To get started, follow these steps:
 https://pypi.org/project/tempt/.
 
 ### Contributing:
-tempt is an open-source project and contributions are welcome. If you'd like to contribute, please contact me.
+tempt is an open-source project and contributions are welcome!
