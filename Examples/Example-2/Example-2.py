@@ -1,7 +1,7 @@
 from tempt import tempt
 
 # Create an instance of the tempt class with the path to the template file
-template = tempt("G:\\My Drive\\Development\\Python\\TemplateSystem\\templates\\template.html")
+template = tempt("full/path/to/template.html")
 
 # Define a dictionary of values to substitute in the template
 context = {
