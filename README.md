@@ -14,47 +14,37 @@ tempt is a flexible and powerful Python template engine designed to make it easy
 
 ```
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
-    <h1>Hello, {{ name }}!</h1>
-    {% if show_age %}
-    <p>You are {{ age }} years old.</p>
-    {% endif %}
-</body>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <h1>{{ heading }}</h1>
+    <p>{{ content }}</p>
+  </body>
 </html>
 ```
 
 2. Next, write a Python script to use the tempt framework:
 
 ```
-import re
+from tempt import tempt
 
-# Include the `tempt` class here
+# Create an instance of the tempt class with the path to the template file
+template = tempt("full/path/to/template.html")
 
-def main():
-    # Instantiate the `tempt` engine with the template file path
-    engine = tempt("template.html")
+# Define a dictionary of values to substitute in the template
+context = {
+  "title": "Example Page",
+  "heading": "This is an example page",
+  "content": "This is some example content"
+}
 
-    # Define the context (data) to be used for substitution
-    context = {
-        "name": "Darth Vader",
-        "age": 44,
-        "show_age": True
-    }
+# Render the template with the context dictionary
+output = template.render(context)
 
-    # Render the template with the context data
-    output = engine.render(context)
+# Print the output
+print(output)
 
-    # Print the rendered output
-    print(output)
-
-if __name__ == "__main__":
-    main()
 ```
 
 
@@ -62,16 +52,13 @@ if __name__ == "__main__":
 
 ```
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
-    <h1>Hello, Darth Vader!</h1>
-    <p>You are 44 years old.</p>
-</body>
+  <head>
+    <title>Example Page</title>
+  </head>
+  <body>
+    <h1>This is an example page</h1>
+    <p>This is some example content</p>
+  </body>
 </html>
 ```
 
