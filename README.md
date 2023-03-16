@@ -8,13 +8,72 @@ tempt is a flexible and powerful Python template engine designed to make it easy
 * Inheritance: tempt supports template inheritance, allowing developers to create a base template with common elements and then extend it with more specific templates.
 * Customizable: tempt is highly extensible, allowing developers to add their own filters and control structures as needed.
 
-### How to use:
-Using tempt is simple and straightforward. To get started, follow these steps:
+### Get started:
 
-1. Install tempt by running ```pip install tempt```.
-2. Import tempt in your project using ```from tempt.tempt import tempt```.
-3. Create an instance of tempt by passing the path to the template file as an argument: ```template = tempt('path/to/template.html')```.
-4. Call the render method on the template object, passing in a dictionary of values to substitute in the template: ```output = template.render({'variable': 'value'})```.
+1. First, create an HTML template file, e.g., template.html:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Hello, {{ name }}!</h1>
+    {% if show_age %}
+    <p>You are {{ age }} years old.</p>
+    {% endif %}
+</body>
+</html>
+```
+
+2. Next, write a Python script to use the tempt framework:
+
+```
+import re
+
+# Include the `tempt` class here
+
+def main():
+    # Instantiate the `tempt` engine with the template file path
+    engine = tempt("template.html")
+
+    # Define the context (data) to be used for substitution
+    context = {
+        "name": "Darth Vader",
+        "age": 44,
+        "show_age": True
+    }
+
+    # Render the template with the context data
+    output = engine.render(context)
+
+    # Print the rendered output
+    print(output)
+
+if __name__ == "__main__":
+    main()
+```
+
+
+3. When you run the script, the tempt framework will render the template file template.html with the provided context data and produce the following output:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Hello, Darth Vader!</h1>
+    <p>You are 44 years old.</p>
+</body>
+</html>
+```
 
 ### PYPI
 https://pypi.org/project/tempt/.
