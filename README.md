@@ -12,7 +12,7 @@ tempt is a flexible and powerful Python template engine designed to make it easy
 
 1. First, create an HTML template file, e.g., template.html:
 
-```
+``` html
 <!DOCTYPE html>
   <head>
     <title>{{ title }}</title>
@@ -26,7 +26,7 @@ tempt is a flexible and powerful Python template engine designed to make it easy
 
 2. Next, write a Python script to use the tempt framework:
 
-```
+``` python
 from tempt import tempt
 
 # Create an instance of the tempt class with the path to the template file
@@ -50,7 +50,7 @@ print(output)
 
 3. When you run the script, the tempt framework will render the template file template.html with the provided context data and produce the following output:
 
-```
+``` html
 <!DOCTYPE html>
   <head>
     <title>Example Page</title>
