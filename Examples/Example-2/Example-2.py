@@ -1,7 +1,7 @@
-from tempt import tempt
+from Placeholdr import Placeholdr
 
-# Create an instance of the tempt class with the path to the template file
-template = tempt("full/path/to/template.html")
+# Create an instance of the Placeholdr class with the path to the template file
+template = Placeholdr("full/path/to/template.html")
 
 # Define a dictionary of values to substitute in the template
 context = {

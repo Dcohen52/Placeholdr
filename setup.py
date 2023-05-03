@@ -1,24 +1,20 @@
 from setuptools import setup, find_packages
 
 VERSION = '0.0.1'
-DESCRIPTION = 'tempt is a flexible and powerful Python template engine for dynamic substitution of values in templates.'
-LONG_DESCRIPTION = '''tempt is a flexible and powerful Python template engine designed to make it 
-easy to substitute placeholders in templates with actual values. 
+DESCRIPTION = 'Placeholdr is a flexible and powerful Python template engine for dynamic substitution of values in ' \
+              'templates.'
+LONG_DESCRIPTION = '''The Placeholdr template engine is a robust and versatile Python library, specifically designed 
+to facilitate the seamless integration of placeholders within templates and their subsequent substitution with actual 
+values. Boasting an intuitive syntax and an extensive array of features, Placeholdr empowers developers to craft dynamic, 
+tailor-made templates for a wide variety of web applications.
 
-### Supported features:
-* template inheritance. 
-* control structures. 
-* filters
 
-With a simple syntax, tempt makes it easy to create dynamic and customizable templates for web applications. The 
-engine is safe to use and undergoes ongoing development to meet our needs as web developers.
-
-For more information and examples, check out tempt's documentation ( coming soon) and Github 
-repository at https://github.com/Dcohen52/tempt.'''
+For more information and examples, check out Placeholdr's documentation ( coming soon) and Github 
+repository at https://github.com/Dcohen52/Placeholdr.'''
 
 # Setting up
 setup(
-    name="tempt",
+    name="Placeholdr",
     version=VERSION,
     author="Dekel Cohen",
     author_email="<dcohen52@gmail.com>",
@@ -27,7 +23,8 @@ setup(
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
     install_requires=[],
-    keywords=['python', 'template engine', 'templating', 'web development', 'template', 'dynamic templates', 'template inheritance', 'control structures', 'filters', 'reusability'],
+    keywords=['python', 'template engine', 'templating', 'web development', 'template', 'dynamic templates',
+              'template inheritance', 'control structures', 'filters', 'reusability', 'custom tags', 'macros', 'Placeholdr'],
     classifiers=[
         "Development Status :: 1 - Planning",
         "Intended Audience :: Developers",

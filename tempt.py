@@ -3,7 +3,7 @@ import datetime
 import html
 
 
-class tempt:
+class Placeholdr:
     """
     A flexible and powerful Python template engine for dynamic substitution of values in templates.
 
@@ -21,7 +21,7 @@ class tempt:
 
     Example usage:
 
-        template = tempt("path/to/template.html")
+        template = Placeholdr("path/to/template.html")
         context = {"title": "My Page", "items": ["Item 1", "Item 2", "Item 3"]}
         output = template.render(context)
 
@@ -38,7 +38,7 @@ class tempt:
         self.blocks = self._parse_blocks(self.template_string)
 
     def _raise_template_error(self, error_message, error_type="Error"):
-        raise TemptError(f"{error_type}: {error_message}")
+        raise PlaceholdrError(f"{error_type}: {error_message}")
 
     def render(self, context):
         output = self.template_string
@@ -64,7 +64,7 @@ class tempt:
         match = re.search(include_re, template_string)
         while match:
             include_path = match.group(1)
-            include_template = tempt(include_path)
+            include_template = Placeholdr(include_path)
             include_output = include_template.render(context)
             template_string = template_string.replace(match.group(0), include_output)
             match = re.search(include_re, template_string)
@@ -204,6 +204,6 @@ class tempt:
         return template_string
 
 
-class TemptError(Exception):
+class PlaceholdrError(Exception):
     """Base class for exceptions in this module."""
     pass

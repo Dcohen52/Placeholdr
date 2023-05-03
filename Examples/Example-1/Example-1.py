@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from pywebwrap.pywebwrap import Wrap
-from tempt import tempt
+from Placeholdr import Placeholdr
 
 #############################
 #       requirements:       #
@@ -13,14 +13,14 @@ template_path = "path/to/template.html"
 output_path = "path/to/desired/path/of/output.html"  # full path
 
 # Define a template
-post_template = tempt(template_path)
+post_template = Placeholdr(template_path)
 
 # Define the dynamic content
 post_content = {
-    "title": "tempt Example",
+    "title": "Placeholdr Example",
     "author": "Dekel Cohen",
     "date": datetime.now().strftime("%B %d, %Y %I:%M %p"),
-    "content": "<pre>Hello, and welcome to tempt! This is an example.</pre>",  # Add pre-formatted content
+    "content": "<pre>Hello, and welcome to Placeholdr! This is an example.</pre>",  # Add pre-formatted content
     "css_url": "path/to/desired/path/of/style.css"  # CSS file - full path
 }
 
