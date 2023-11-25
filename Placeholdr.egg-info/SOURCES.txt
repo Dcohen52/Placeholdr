@@ -1,0 +1,9 @@
+LICENSE
+README.md
+setup.py
+Placeholdr/__init__.py
+Placeholdr/placeholdr.py
+Placeholdr.egg-info/PKG-INFO
+Placeholdr.egg-info/SOURCES.txt
+Placeholdr.egg-info/dependency_links.txt
+Placeholdr.egg-info/top_level.txt

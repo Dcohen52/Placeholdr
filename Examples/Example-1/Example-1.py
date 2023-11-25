@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from pywebwrap.pywebwrap import Wrap
-from Placeholdr import Placeholdr
+from Placeholdr.placeholdr import Placeholdr
 
 #############################
 #       requirements:       #
@@ -9,8 +9,8 @@ from Placeholdr import Placeholdr
 #############################
 
 # Define the path of the template and output file
-template_path = "path/to/template.html"
-output_path = "path/to/desired/path/of/output.html"  # full path
+template_path = "/Users/dekelcohen/Library/CloudStorage/GoogleDrive-dcohen52@gmail.com/My Drive/Development/Python/jsonLang/tempt/templates/index.html"
+output_path = "/Users/dekelcohen/Library/CloudStorage/GoogleDrive-dcohen52@gmail.com/My Drive/Development/Python/jsonLang/tempt/output.html"  # full path
 
 # Define a template
 post_template = Placeholdr(template_path)
