@@ -47,6 +47,7 @@ class Placeholdr:
         output = self._render_filters(output, context)
         output = self._render_macros(output, context)
         output = self._render_autoescape(output, context)
+        output = self._render_for(output, context)
         return output
 
     def _parse_blocks(self, template_string):
@@ -92,32 +93,53 @@ class Placeholdr:
         return template_string
 
     def _render_control_structures(self, template_string, context):
-        # Render control structures
-        control_re = r"{%\s*(\w+)\s*(.*?)\s*%}(.*?){%\s*end\1\s*%}"
+        # This method now handles if-else structures properly
+        control_re = r"{%\s*(\w+)\s*(.*?)\s*%}(.*?)(?:{%\s*else\s*%}(.*?))??{%\s*end\1\s*%}"
         for match in re.finditer(control_re, template_string, flags=re.DOTALL):
             tag_name = match.group(1)
             tag_args = match.group(2)
             body = match.group(3)
+            else_body = match.group(4) or ""
 
-            if tag_name in self.custom_tags:
+            if tag_name == "if":
+                condition = eval(tag_args, {}, context)
+                if condition:
+                    output = self._process_body(body, context)
+                else:
+                    output = self._process_body(else_body, context)
+            elif tag_name in self.custom_tags:
                 output = self.custom_tags[tag_name](tag_args, body, context)
-                template_string = template_string.replace(match.group(0), output)
             else:
                 raise ValueError(f"Unknown control tag: {tag_name}")
+
+            template_string = template_string.replace(match.group(0), output)
 
         return template_string
 
     def _render_if(self, template_string, context):
         if_re = r"{%\s*if\s+(.*?)\s*%}(.*?){%\s*endif\s*%}"
-        for match in re.finditer(if_re, template_string, flags=re.DOTALL):
+        while True:
+            match = re.search(if_re, template_string, flags=re.DOTALL)
+            if not match:
+                break
             condition = match.group(1)
             body = match.group(2)
             if eval(condition, {}, context):
-                output = self.render({"__body__": body, **context})
-                template_string = template_string.replace(match.group(0), output)
+                output = self._process_body(body, context)
             else:
-                template_string = template_string.replace(match.group(0), "")
+                output = ""
+            template_string = template_string.replace(match.group(0), output)
         return template_string
+
+    def _process_body(self, body, context):
+        # Fixed placeholder pattern to use open_tag and close_tag
+        for key, value in context.items():
+            placeholder_pattern = re.escape(self.open_tag) + r"\s*" + re.escape(key) + r"\s*" + re.escape(
+                self.close_tag)
+            body = re.sub(placeholder_pattern, str(value), body)
+
+        body = self._render_filters(body, context)
+        return body
 
     def _render_ifnot(self, template_string, context):
         ifnot_re = r"{%\s*ifnot\s+(.*?)\s*%}(.*?){%\s*endif\s*%}"
@@ -199,6 +221,34 @@ class Placeholdr:
                 output = str(variable_value)
                 template_string = template_string.replace(match.group(0), output)
         return template_string
+
+    def _render_for(self, template_string, context):
+        for_re = r"{%\s*for\s+(\w+)\s+in\s+(.*?)\s*%}(.*?){%\s*endfor\s*%}"
+        while True:
+            match = re.search(for_re, template_string, flags=re.DOTALL)
+            if not match:
+                break
+
+            loop_var = match.group(1)
+            iterable = eval(match.group(2), {}, context)
+            loop_body = match.group(3)
+            output = ""
+
+            for item in iterable:
+                loop_context = {loop_var: item, **context}
+                processed_body = self._process_loop_body(loop_body, loop_context)
+                output += processed_body
+            template_string = template_string.replace(match.group(0), output)
+        return template_string
+
+    def _process_loop_body(self, body, context):
+        for key, value in context.items():
+            placeholder_pattern = re.escape(self.open_tag) + r"\s*" + re.escape(key) + r"\s*" + re.escape(
+                self.close_tag)
+            body = re.sub(placeholder_pattern, str(value), body)
+        body = self._render_control_structures(body, context)
+        body = self._render_filters(body, context)
+        return body
 
 
 class PlaceholdrError(Exception):

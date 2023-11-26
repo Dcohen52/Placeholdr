@@ -4,6 +4,7 @@ The Placeholdr template engine is a robust and versatile Python library, specifi
 ## Features:
 * **Templating:** Placeholdr provides advanced template functionality, including variable substitution, template inheritance, includes, control structures, filters, custom tags, and macros.
 * **Simple syntax:** The syntax used by Placeholdr is simple and intuitive, using double curly braces (e.g., {{ variable }}) for placeholders, and special syntax (e.g., {% if condition %} ... {% endif %}) for control structures.
+* **Custom Syntax:** Placeholdr allows developers to customize the syntax used for placeholders and control structures, enabling them to use any syntax they want.
 * **Inheritance:** Placeholdr supports template inheritance, allowing developers to create a base template with common elements and then extend it with more specific templates.
 * **Includes:** Placeholdr allows for including other template files within a template using the {% include "path/to/template" %} syntax, promoting modularity and reusability.
 * **Control Structures:** Placeholdr offers a variety of control structures like {% if condition %}, {% endif %}, {% for item in iterable %}, and {% endfor %} to enable dynamic content generation.
@@ -18,35 +19,61 @@ The Placeholdr template engine is a robust and versatile Python library, specifi
 
 ``` html
 <!DOCTYPE html>
-  <head>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ css_url }}">
     <title>{{ title }}</title>
-  </head>
-  <body>
-    <h1>{{ heading }}</h1>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    {% if author %}
+    <p><strong>Author:</strong> {{ author }}</p>
+    {% endif %}
+
+    {% if date %}
+    <p><strong>Date:</strong> {{ date }}</p>
+    {% endif %}
+
+    {% if items %}
+    <ul>
+        {% for item in items %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No items available.</p>
+    {% endif %}
+
+    {% if content %}
     <p>{{ content }}</p>
-  </body>
+    {% else %}
+    <p>No content available.</p>
+    {% endif %}
+</body>
 </html>
+
 ```
 
 2. Next, write a Python script to use the Placeholdr framework:
 
 ``` python
-from Placeholdr import Placeholdr
+from Placeholdr.placeholder import Placeholdr
 
-# Create an instance of the Placeholdr class with the path to the template file
 template = Placeholdr("full/path/to/template.html")
 
-# Define a dictionary of values to substitute in the template
 context = {
-  "title": "Example Page",
-  "heading": "This is an example page",
-  "content": "This is some example content"
+    "title": "Placeholdr Example",
+    "author": "Author",
+    "date": datetime.now().strftime("%B %d, %Y %I:%M %p"),
+    "content": "<pre>Hello, and welcome to Placeholdr! This is an example.</pre>",
+    "items": ['Item 1', 'Item 2', 'Item 3'],
+    "css_url": "../styles/style.css"
 }
 
-# Render the template with the context dictionary
 output = template.render(context)
 
-# Print the output
 print(output)
 
 ```
@@ -56,14 +83,25 @@ print(output)
 
 ``` html
 <!DOCTYPE html>
-  <head>
-    <title>Example Page</title>
-  </head>
-  <body>
-    <h1>This is an example page</h1>
-    <p>This is some example content</p>
-  </body>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/Users/dekelcohen/Library/CloudStorage/GoogleDrive-dcohen52@gmail.com/My Drive/Development/Python/jsonLang/tempt/templates/styles/style.css">
+    <title>Placeholdr Example</title>
+</head>
+<body>
+    <h1>Placeholdr Example</h1>
+    <p><strong>Author:</strong>Author</p>
+    <p><strong>Date:</strong> November 26, 2023 11:19 AM</p>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <p><pre>Hello, and welcome to Placeholdr! This is an example.</pre></p>
+</body>
 </html>
+
 ```
 
 ### PYPI

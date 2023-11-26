@@ -1,5 +1,12 @@
 # Changelog
-## Version 0.0.2 (Current)
+
+## Version 0.0.4-6 (Current)
+* Full integration with MVCactus framework.
+* Improvements to the conditions and loops rendering.
+* General code improvements and bug fixes.
+
+
+## Version 0.0.2
 * Added the `PlaceholdrError` exception class for raising custom errors in the module.
 * Added the `_raise_template_error` method to raise custom exceptions with a custom error message and error type.
 * Updated the `_render_control_structures` method.

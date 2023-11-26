@@ -20,8 +20,10 @@ post_content = {
     "title": "Placeholdr Example",
     "author": "Dekel Cohen",
     "date": datetime.now().strftime("%B %d, %Y %I:%M %p"),
-    "content": "<pre>Hello, and welcome to Placeholdr! This is an example.</pre>",  # Add pre-formatted content
-    "css_url": "path/to/desired/path/of/style.css"  # CSS file - full path
+    "content": "<pre>Hello, and welcome to Placeholdr! This is an example.</pre>",
+    "items": ['Item 1', 'Item 2', 'Item 3'],
+    "css_url": "/Users/dekelcohen/Library/CloudStorage/GoogleDrive-dcohen52@gmail.com/My Drive/Development/Python/jsonLang/tempt/templates/styles/style.css"
+
 }
 
 # Render the template with the dynamic content
